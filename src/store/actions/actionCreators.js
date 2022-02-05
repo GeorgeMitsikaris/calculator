@@ -13,17 +13,15 @@ export const setNumber = (payload) => {
 		};
 };
 
-export const clearNumber = (payload) => {
+export const clearNumber = () => {
 	return {
 			type: CLEAR_NUMBER,
-			payload,
 		};
 };
 
-export const deleteLastDigit = (payload) => {
+export const deleteLastDigit = () => {
 	return {
 			type: DELETE_LAST_DIGIT,
-			payload,
 		};
 };
 
@@ -34,9 +32,8 @@ export const setOperation = (payload) => {
 		};
 };
 
-export const calculate = (payload) => {
+export const calculate = () => {
 	return {
-			type: CALCULATE,
-			payload,
+			type: CALCULATE
 		};
 };

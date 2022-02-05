@@ -2,17 +2,37 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button/Button";
 import styles from "./Calculator.module.scss";
-import { setNumber, setOperation } from "../../store/actions/actionCreators";
+import {
+	setNumber,
+	setOperation,
+  calculate,
+  clearNumber,
+  deleteLastDigit
+} from "../../store/actions/actionCreators";
 
 const Calculator = () => {
-  const currentNumber = useSelector(state => state.calc.currentNumber);
-  const prevNumber = useSelector((state) => state.calc.prevNumber);
-  const dispatch = useDispatch();
+	const currentNumber = useSelector((state) => state.calc.currentNumber);
+	const prevNumber = useSelector((state) => state.calc.prevNumber);
+	const dispatch = useDispatch();
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.header}>Calculator</h1>
 			<div className={styles.enteredText}>{prevNumber}</div>
 			<div className={styles.enteredText}>{currentNumber || 0}</div>
+			<div className={styles.buttonContainer}>
+				<Button dispatch={dispatch} payload={"r"} actionType={setOperation}>
+					&radic;<span className={styles.overline}>X</span>
+				</Button>
+				<Button dispatch={dispatch} payload={"e"} actionType={setOperation}>
+					x<sup>2</sup>
+				</Button>
+				<Button dispatch={dispatch} actionType={clearNumber}>
+					CE
+				</Button>
+				<Button dispatch={dispatch} actionType={deleteLastDigit}>
+					DEL
+				</Button>
+			</div>
 			<div className={styles.buttonContainer}>
 				<Button dispatch={dispatch} payload={"1"} actionType={setNumber}>
 					1
@@ -62,7 +82,9 @@ const Calculator = () => {
 				<Button dispatch={dispatch} payload={"."} actionType={setNumber}>
 					.
 				</Button>
-				<Button>=</Button>
+				<Button dispatch={dispatch} actionType={calculate}>
+					=
+				</Button>
 				<Button dispatch={dispatch} payload={"-"} actionType={setOperation}>
 					-
 				</Button>

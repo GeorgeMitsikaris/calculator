@@ -9,7 +9,8 @@ import {
 const initialState = {
 	prevNumber: "",
 	currentNumber: "",
-	operation: "",
+  operation: "",
+  isFinal: false
 };
 
 const calculate = (state, action) => {
@@ -19,34 +20,65 @@ const calculate = (state, action) => {
   let value = "";
   switch (state.operation) {
     case "+":
-      value = previous + current + action.payload;
+      value = previous + current ;
       break;
     case "-":
-      value = previous - current + action.payload;
+      value = previous - current;
       break;
     case "*":
-      value = previous * current + action.payload;
+      value = previous * current;
       break;
     case "÷":
-      value = previous / current + action.payload;
+      value = previous / current;
       break;
     default:
       value = "";
   }
-  return value;
+  return value.toString();
 };
 export const calcReducer = (state = initialState, action) => {  
 	switch (action.type) {
 		case SET_NUMBER:
+			// isFinal flag is set to true only when the user hits the equal button and we make sure that we override the result from the previous calculation
+			if (state.isFinal) {
+				return {
+					...state,
+					currentNumber: action.payload,
+					prevNumber: "",
+					operation: "",
+					isFinal: false,
+				};
+			}
+			// We want only one period in the number
 			if (state.currentNumber.includes(".") && action.payload === ".")
 				return state;
+			// We don't want to add zeros in front of the number
 			if (state.currentNumber === "" && action.payload === "0") return state;
 			return {
 				...state,
 				currentNumber: `${state.currentNumber}${action.payload}`,
 			};
-    case SET_OPERATION:
-      // This check is for the first time we hit an operation button
+		case SET_OPERATION:
+			// Handles square root operation
+			if (action.payload === "r") {
+				return {
+					...state,
+					currentNumber: Math.sqrt(state.currentNumber),
+				};
+      }
+      
+			// Handles x squared operation
+			if (action.payload === "e") {
+				return {
+					...state,
+					currentNumber: state.currentNumber * state.currentNumber,
+				};
+			}
+
+			// This check is for the first time we hit an operation button without hitting a number first
+			if (state.prevNumber === "" && state.currentNumber === "") return state;
+
+			// This check is for the first time we hit an operation button and we have hit a number
 			if (state.prevNumber === "") {
 				return {
 					...state,
@@ -54,29 +86,49 @@ export const calcReducer = (state = initialState, action) => {
 					prevNumber: `${state.currentNumber}${action.payload}`,
 					operation: action.payload,
 				};
-      }
-      
-      // This check is for the case we hit the wrong operation button and want to change the operation
-      if (state.currentNumber === '') {
-        return {
-          ...state,
-          operation: action.payload,
-          prevNumber: `${parseFloat(state.prevNumber)}${action.payload}`
-        }
-      }
+			}
 
-      // 
-      if (state.prevNumber === "" && state.currentNumber === "") return state;
-      
+			// This check is for the case we hit the wrong operation button and want to change the operation
+			if (state.currentNumber === "") {
+				return {
+					...state,
+					operation: action.payload,
+					prevNumber: `${parseFloat(state.prevNumber)}${action.payload}`,
+				};
+			}
+
 			return {
 				...state,
 				currentNumber: "",
-				prevNumber: calculate(state, action),
+				prevNumber: `${calculate(state)}${action.payload}`,
 				operation: action.payload,
 			};
-		case CLEAR_NUMBER:
-		case DELETE_LAST_DIGIT:
 		case CALCULATE:
+			if (
+				state.currentNumber === "" ||
+				state.prevNumber === "" ||
+				state.operation === ""
+			)
+				return state;
+			return {
+				...state,
+				currentNumber: calculate(state, action),
+				prevNumber: "",
+				operation: "",
+				isFinal: true,
+			};
+		case CLEAR_NUMBER:
+			return {};
+    case DELETE_LAST_DIGIT:
+      if (state.isFinal) {
+        return {
+          ...state
+        }
+      }
+      return {
+        ...state,
+        currentNumber: state.currentNumber.slice(0, -1)
+      }
 		default:
 			return state;
 	}
