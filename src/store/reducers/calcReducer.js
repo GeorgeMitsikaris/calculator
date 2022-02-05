@@ -118,7 +118,12 @@ export const calcReducer = (state = initialState, action) => {
 				isFinal: true,
 			};
 		case CLEAR_NUMBER:
-			return {};
+      return {
+				prevNumber: "",
+				currentNumber: "",
+				operation: "",
+				isFinal: false,
+			};
     case DELETE_LAST_DIGIT:
       if (state.isFinal) {
         return {
