@@ -1,4 +1,6 @@
-@use '../../index.scss';
+@use '../../Styles/variables.scss';
 .btn {
-	background-color: index.$main-color;
+	width: 24%;
+	height: 7rem;
+	border-radius: 3px;
 }

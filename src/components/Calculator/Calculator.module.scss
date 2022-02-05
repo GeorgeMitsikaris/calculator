@@ -1,0 +1,37 @@
+@use '../../Styles/typography.scss';
+@use '../../Styles/variables.scss';
+
+.container {
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 80rem;
+  display: grid;
+  border: 1px solid variables.$black;
+  border-radius: .5rem;
+  padding: 2rem;
+  background-color: variables.$secondary-color
+}
+
+.header {
+  text-align: right;
+}
+
+.enteredText {
+  width: 100%;
+  background-color: variables.$grey;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.result {
+  width: 100%;
+  background-color: variables.$grey;
+  height: 3rem;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1.25%;
+  margin-bottom: .5rem;
+}
+
