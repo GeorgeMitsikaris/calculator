@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 
 describe("Button component", () => {
-  const setup = (children, dispatch, actionType, payload) => {
+  const setup = (children) => {
     render(
       <Provider store={store}>
-        <Button dispatch={dispatch} actionType={actionType} payload={payload}>{children}</Button>
+        <Button>{children}</Button>
       </Provider>
     )
   }

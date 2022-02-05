@@ -17,8 +17,12 @@ const Calculator = () => {
 	return (
 		<div className={styles.container}>
 			<h1 className={styles.header}>Calculator</h1>
-			<div className={styles.enteredText}>{prevNumber}</div>
-			<div className={styles.enteredText}>{currentNumber || 0}</div>
+			<div className={styles.enteredText} data-testid="prev-value">
+				{prevNumber}
+			</div>
+			<div className={styles.enteredText} data-testid="current-value">
+				{currentNumber || 0}
+			</div>
 			<div className={styles.buttonContainer}>
 				<Button dispatch={dispatch} payload={"r"} actionType={setOperation}>
 					&radic;<span className={styles.overline}>X</span>
