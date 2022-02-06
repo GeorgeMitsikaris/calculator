@@ -5,9 +5,9 @@ import styles from "./Calculator.module.scss";
 import {
 	setNumber,
 	setOperation,
-  calculate,
-  clearNumber,
-  deleteLastDigit
+	calculate,
+	clearNumber,
+	deleteLastDigit,
 } from "../../store/actions/actionCreators";
 
 const Calculator = () => {
@@ -15,12 +15,14 @@ const Calculator = () => {
 	const prevNumber = useSelector((state) => state.calc.prevNumber);
 	const dispatch = useDispatch();
 	return (
-		<div className={styles.container}>
-			<h1 className={styles.header}>Calculator</h1>
-			<div className={styles.enteredText} data-testid="prev-value">
+		<div className={styles.container} data-test="calculator-component">
+			<h1 className={styles.header} data-test="header">
+				Calculator
+			</h1>
+			<div className={styles.enteredText} data-test="prev-value">
 				{prevNumber}
 			</div>
-			<div className={styles.enteredText} data-testid="current-value">
+			<div className={styles.enteredText} data-test="current-value">
 				{currentNumber || 0}
 			</div>
 			<div className={styles.buttonContainer}>
@@ -30,7 +32,7 @@ const Calculator = () => {
 				<Button dispatch={dispatch} payload={"e"} actionType={setOperation}>
 					x<sup>2</sup>
 				</Button>
-				<Button dispatch={dispatch} actionType={clearNumber}>
+				<Button dispatch={dispatch} actionType={clearNumber} test="value-clear">
 					CE
 				</Button>
 				<Button dispatch={dispatch} actionType={deleteLastDigit}>
@@ -38,7 +40,12 @@ const Calculator = () => {
 				</Button>
 			</div>
 			<div className={styles.buttonContainer}>
-				<Button dispatch={dispatch} payload={"1"} actionType={setNumber}>
+				<Button
+					dispatch={dispatch}
+					payload={"1"}
+					actionType={setNumber}
+					test="value-1"
+				>
 					1
 				</Button>
 				<Button dispatch={dispatch} payload={"2"} actionType={setNumber}>
@@ -61,7 +68,12 @@ const Calculator = () => {
 				<Button dispatch={dispatch} payload={"6"} actionType={setNumber}>
 					6
 				</Button>
-				<Button dispatch={dispatch} payload={"*"} actionType={setOperation}>
+				<Button
+					dispatch={dispatch}
+					payload={"*"}
+					actionType={setOperation}
+					test="value-*"
+				>
 					*
 				</Button>
 			</div>

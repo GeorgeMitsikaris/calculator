@@ -11,7 +11,7 @@ The user can change the operation that has been choosed and also can see the the
 The user neither can enter multiple periods nor zeros in front of the number and also cannot divide by zero.
 The operation for the squared root of x and the x squared applied to the entered number not to the result. If the entered number is zero then nothing happens.
 
-## Tasks
+# Tasks
 1. Find how many components is needed and create them.
 2. Create layout, apply styles and make sure it's responsive.
 3. Implement Redux setup and create action creators.
@@ -19,7 +19,7 @@ The operation for the squared root of x and the x squared applied to the entered
 5. Create tests
 6. Final CSS changes and qa
 
-## Documentation
+# Documentation
 ### CSS
 This project uses css modules with scss. There is a Styles folder which currently has two files for variables and for typography.
 The connection with scss files of the components is made using @use since the @import is deprecated.
