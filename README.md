@@ -26,29 +26,29 @@ The connection with scss files of the components is made using @use since the @i
 The app is responsive until 240px. The rem unit is set up to be 10px == 1rem.
 ### Components
 Beside the App component the app is using two more components. The first is the Calculator and the second which is child to Calculator is the Button.
-1. Button
+#### Button
   It receives as props the following:
-  a. {children} for the button text
-  b. {dispatch} which is defined using the useDispatch hook in the parent component
-  c. {actionType} because there are five different actions
-  d. {payload} the data (if needed) that uses the reducer
-2. Calculator
+  1. {children} for the button text
+  2. {dispatch} which is defined using the useDispatch hook in the parent component
+  3. {actionType} because there are five different actions
+  4. {payload} the data (if needed) that uses the reducer
+#### Calculator
   The elements for the Calculator is described in Project Analysis. The bottom div receives its value from the redux state value currentNumber. 
   The top div receives its value from the redux state value prevNumber.
 ### Redux
-1. State:
+#### State:
   The state has five values prevNumber, currentNumber, operation and isFinal. The first three is self explanatory. The isFinal is flag to indicate that the calculation of the value is coming from the equals button and not from the operations buttons and is the final calculation
-2. Action creators:
-  a. setNumber which takes as an argument the payload which represents the text of the number and period buttons
-  b. setOperation which takes as an argument the payload which represents the text of the operation buttons
-  c. calculate which takes no arguments and calculates the result of the operation based on the values currentNumber, prevNumber and operation of the state
-  d. clearNumber which takes no arguments and clears the divs text
-  e. deleteLastDigit which takes no arguments and delete the last digit of the entered number
-3. Reducer:
+#### Action creators:
+  1. setNumber which takes as an argument the payload which represents the text of the number and period buttons
+  2. setOperation which takes as an argument the payload which represents the text of the operation buttons
+  3. calculate which takes no arguments and calculates the result of the operation based on the values currentNumber, prevNumber and operation of the state
+  4. clearNumber which takes no arguments and clears the divs text
+  5. deleteLastDigit which takes no arguments and delete the last digit of the entered number
+#### Reducer:
   There is a calculate function that takes as argument the state object and calculates the result of the respective operation. First we parseFloat the currentNumber and prevNumber. If it's not a number any of these values we return empty string. In any other case we take the operation from the state and apply it to the previous and current numbers and return the value. 
-  a. case setNumber: Sets the currentNumber only. If isFinal is true sets the entered value and clears the rest of the state. No multiple periods or zeros in front of the number is allowed.
-  b. case setOperation: If isFinal is true does nothing. If square root or squared is pressed, sets the currentNumber to the respective math operation. If prevNumber and currentNumber is empty returns the current state (does nothing). The first time we hit an operation button and we have already hit a number we set the currentNumber to empty string, we take the currentNumber and set it to prevNumber and append the sympol of the equation. If the user wants to change the operation that has been selected we set the state operation to the new value and we parseFloat the prevNumber to remove the old operation symbol and append the new one. In any other case we set the currentNumber to empty string set the new operation value and execute the calculate function.
-  c. case calculate: If any of the currentNumber, prevNumber or operation is empty string we do nothing (return state). In any other case we set the currentNumber to the result of the calculate function and default the rest values of the state.
-  d. case clearNumber: We default the state.
-  e. case deleteLastDigit: If isFinal is true we do nothing (return state). In any other case we delete the last digit with the slice method.
+  1. case setNumber: Sets the currentNumber only. If isFinal is true sets the entered value and clears the rest of the state. No multiple periods or zeros in front of the number is allowed.
+  2. case setOperation: If isFinal is true does nothing. If square root or squared is pressed, sets the currentNumber to the respective math operation. If prevNumber and currentNumber is empty returns the current state (does nothing). The first time we hit an operation button and we have already hit a number we set the currentNumber to empty string, we take the currentNumber and set it to prevNumber and append the sympol of the equation. If the user wants to change the operation that has been selected we set the state operation to the new value and we parseFloat the prevNumber to remove the old operation symbol and append the new one. In any other case we set the currentNumber to empty string set the new operation value and execute the calculate function.
+  3. case calculate: If any of the currentNumber, prevNumber or operation is empty string we do nothing (return state). In any other case we set the currentNumber to the result of the calculate function and default the rest values of the state.
+  4. case clearNumber: We default the state.
+  5. case deleteLastDigit: If isFinal is true we do nothing (return state). In any other case we delete the last digit with the slice method.
 
