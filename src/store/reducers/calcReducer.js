@@ -13,7 +13,7 @@ const initialState = {
   isFinal: false
 };
 
-const calculate = (state, action) => {
+const calculate = (state) => {
   const current = parseFloat(state.currentNumber);
   const previous = parseFloat(state.prevNumber);
   if (isNaN(current) || isNaN(previous)) return "";
@@ -59,8 +59,11 @@ export const calcReducer = (state = initialState, action) => {
 				currentNumber: `${state.currentNumber}${action.payload}`,
 			};
 		case SET_OPERATION:
+			// We don't do anything if the user try to select an operation before select a number
+			if (state.isFinal) return state;
 			// Handles square root operation
 			if (action.payload === "r") {
+				if (state.currentNumber === '') return state;
 				return {
 					...state,
 					currentNumber: Math.sqrt(state.currentNumber),
@@ -69,6 +72,7 @@ export const calcReducer = (state = initialState, action) => {
       
 			// Handles x squared operation
 			if (action.payload === "e") {
+				if (state.currentNumber === "") return state;
 				return {
 					...state,
 					currentNumber: state.currentNumber * state.currentNumber,
@@ -112,7 +116,7 @@ export const calcReducer = (state = initialState, action) => {
 				return state;
 			return {
 				...state,
-				currentNumber: calculate(state, action),
+				currentNumber: calculate(state),
 				prevNumber: "",
 				operation: "",
 				isFinal: true,
