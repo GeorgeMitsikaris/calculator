@@ -67,7 +67,7 @@ describe("Calculator component", () => {
 	});
 });
 
-describe("redux", () => {
+describe("User interactions", () => {
 	const setup = () => {
 		return mount(
 			<Provider store={store}>
@@ -77,11 +77,11 @@ describe("redux", () => {
 	};
 
 	let wrapper;
-	// beforeEach(() => {
-	// 	wrapper = setup();
-	// 	const currentNumberDiv = wrapper.find("[data-test='current-value]");
-	// 	const prevNumberDiv = wrapper.find("[data-test='prev-value]");
-	// })
+	beforeEach(() => {
+		wrapper = setup();
+		const buttonClear = wrapper.find("[data-test='value-clear']");
+		buttonClear.simulate("click");
+	})
 
 	it("shows in currentNumber div the number 1 when clicked the button with text 1", () => {
 		wrapper = setup();
@@ -91,17 +91,209 @@ describe("redux", () => {
 		expect(currentNumberDiv.text()).toBe("1");
 	});
 
-	it("shows in currentNumber div the number 0 ans prevNumber value 1* when clicked the button with text 1 and after clicked button *", () => {
+	it("after clicking the buttons 1 and * it shows in currentNumber div the text 0 and in prevNumber the text 1*", () => {
 		wrapper = setup();
-		const buttonOne = wrapper.find("[data-test='value-1']"); 
+		const buttonOne = wrapper.find("[data-test='value-1']");
 		const buttonMultiply = wrapper.find("[data-test='value-*']");
-		const buttonClear = wrapper.find("[data-test='value-clear']");
-		buttonClear.simulate("click");
 		buttonOne.simulate("click");
 		buttonMultiply.simulate("click");
 		const currentNumberDiv = wrapper.find("[data-test='current-value']");
 		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
 		expect(currentNumberDiv.text()).toBe("0");
 		expect(prevNumberDiv.text()).toBe("1*");
+	});
+
+	it("(2 * 4) displays in currentNumber div the text 4 and in prevNumber the text 2*", () => {
+		wrapper = setup();
+		const buttonTwo = wrapper.find("[data-test='value-2']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		buttonTwo.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonFour.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("4"); 
+		expect(prevNumberDiv.text()).toBe("2*"); 
+	});
+
+	it("(2 * 4 +) displays in currentNumber div the text 4 and in prevNumber the text 8+", () => {
+		wrapper = setup();
+		const buttonTwo = wrapper.find("[data-test='value-2']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonAdd = wrapper.find("[data-test='value-+']");
+		buttonTwo.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonFour.simulate("click");
+		buttonAdd.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("0");
+		expect(prevNumberDiv.text()).toBe("8+");
+	});
+
+	it("(2 * 4 =) displays in currentNumber div the text 8 and in prevNumber empty string", () => {
+		wrapper = setup();
+		const buttonTwo = wrapper.find("[data-test='value-2']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonTwo.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonFour.simulate("click");
+		buttonEquals.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("8");
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("(8 / 4 =) displays in currentNumber div the text 2 and in prevNumber empty string", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonDivide = wrapper.find("[data-test='value-/']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonEight.simulate("click");
+		buttonDivide.simulate("click");
+		buttonFour.simulate("click");
+		buttonEquals.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("2");
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("(8 - 4 =) displays in currentNumber div the text 4 and in prevNumber empty string", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonSubtract = wrapper.find("[data-test='value--']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonEquals = wrapper.find("[data-test='value-=']"); 
+		buttonEight.simulate("click");
+		buttonSubtract.simulate("click");
+		buttonFour.simulate("click");
+		buttonEquals.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("4");
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("divide by zero does nothing", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonDivide = wrapper.find("[data-test='value-/']");
+		const buttonZero = wrapper.find("[data-test='value-0']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonEight.simulate("click");
+		buttonDivide.simulate("click");
+		buttonZero.simulate("click");
+		buttonEquals.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("0");
+		expect(prevNumberDiv.text()).toBe("8÷");
+	});
+
+	it("does not displays multiple periods", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonPeriod = wrapper.find("[data-test='value-.']");
+		const buttonOne = wrapper.find("[data-test='value-1']");
+		buttonEight.simulate("click");
+		buttonPeriod.simulate("click");
+		buttonPeriod.simulate("click");
+		buttonPeriod.simulate("click");
+		buttonOne.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("8.1");
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("does not displays multiple zeros in front of the number", () => {
+		wrapper = setup();
+		const buttonZero = wrapper.find("[data-test='value-0']");
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonOne = wrapper.find("[data-test='value-1']");
+		buttonZero.simulate("click");
+		buttonZero.simulate("click");
+		buttonZero.simulate("click");
+		buttonEight.simulate("click");
+		buttonOne.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("81");
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("(8 * 4 square root =) current number displays 18 previous number displays empty string", () => {
+		wrapper = setup();
+		const buttonRoot = wrapper.find("[data-test='value-r']");
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonEight.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonFour.simulate("click");
+		buttonRoot.simulate("click");
+		buttonEquals.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("16");
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("(8 * 4 squared =) current number displays 128 previous number displays empty string", () => {
+		wrapper = setup();
+		const buttonSquared = wrapper.find("[data-test='value-e']");
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonEight.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonFour.simulate("click");
+		buttonSquared.simulate("click");
+		buttonEquals.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("128");  
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("button DEL deletes the last digit", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonDel = wrapper.find("[data-test='value-del']");
+		buttonEight.simulate("click");
+		buttonFour.simulate("click");
+		buttonEight.simulate("click");
+		buttonFour.simulate("click");
+		buttonDel.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("848"); 
+		expect(prevNumberDiv.text()).toBe("");
+	});
+
+	it("button CE deletes everything", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonClear = wrapper.find("[data-test='value-clear']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		buttonEight.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonFour.simulate("click");
+		buttonClear.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("0");
+		expect(prevNumberDiv.text()).toBe("");
 	});
 });

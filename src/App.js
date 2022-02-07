@@ -2,10 +2,10 @@ import Calculator from './components/Calculator/Calculator';
 
 function App() {
   return (
-    <div>
-      <Calculator />
-    </div>
-  );
+		<div data-test="app-component">
+			<Calculator />
+		</div>
+	);
 } 
 
 export default App;

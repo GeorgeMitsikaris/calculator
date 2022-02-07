@@ -26,16 +26,30 @@ const Calculator = () => {
 				{currentNumber || 0}
 			</div>
 			<div className={styles.buttonContainer}>
-				<Button dispatch={dispatch} payload={"r"} actionType={setOperation}>
-					&radic;<span className={styles.overline}>X</span>
+				<Button
+					dispatch={dispatch}
+					payload={"r"}
+					actionType={setOperation}
+					test="value-r"
+				>
+					&radic;<span className={styles.overline}>x</span>
 				</Button>
-				<Button dispatch={dispatch} payload={"e"} actionType={setOperation}>
+				<Button
+					dispatch={dispatch}
+					payload={"e"}
+					actionType={setOperation}
+					test="value-e"
+				>
 					x<sup>2</sup>
 				</Button>
 				<Button dispatch={dispatch} actionType={clearNumber} test="value-clear">
 					CE
 				</Button>
-				<Button dispatch={dispatch} actionType={deleteLastDigit}>
+				<Button
+					dispatch={dispatch}
+					actionType={deleteLastDigit}
+					test="value-del"
+				>
 					DEL
 				</Button>
 			</div>
@@ -48,18 +62,33 @@ const Calculator = () => {
 				>
 					1
 				</Button>
-				<Button dispatch={dispatch} payload={"2"} actionType={setNumber}>
+				<Button
+					dispatch={dispatch}
+					payload={"2"}
+					actionType={setNumber}
+					test="value-2"
+				>
 					2
 				</Button>
 				<Button dispatch={dispatch} payload={"3"} actionType={setNumber}>
 					3
 				</Button>
-				<Button dispatch={dispatch} payload={"÷"} actionType={setOperation}>
+				<Button
+					dispatch={dispatch}
+					payload={"÷"}
+					actionType={setOperation}
+					test="value-/"
+				>
 					÷
 				</Button>
 			</div>
 			<div className={styles.buttonContainer}>
-				<Button dispatch={dispatch} payload={"4"} actionType={setNumber}>
+				<Button
+					dispatch={dispatch}
+					payload={"4"}
+					actionType={setNumber}
+					test="value-4"
+				>
 					4
 				</Button>
 				<Button dispatch={dispatch} payload={"5"} actionType={setNumber}>
@@ -81,27 +110,52 @@ const Calculator = () => {
 				<Button dispatch={dispatch} payload={"7"} actionType={setNumber}>
 					7
 				</Button>
-				<Button dispatch={dispatch} payload={"8"} actionType={setNumber}>
+				<Button
+					dispatch={dispatch}
+					payload={"8"}
+					actionType={setNumber}
+					test="value-8"
+				>
 					8
 				</Button>
 				<Button dispatch={dispatch} payload={"9"} actionType={setNumber}>
 					9
 				</Button>
-				<Button dispatch={dispatch} payload={"+"} actionType={setOperation}>
+				<Button
+					dispatch={dispatch}
+					payload={"+"}
+					actionType={setOperation}
+					test="value-+"
+				>
 					+
 				</Button>
 			</div>
 			<div className={styles.buttonContainer}>
-				<Button dispatch={dispatch} payload={"0"} actionType={setNumber}>
+				<Button
+					dispatch={dispatch}
+					payload={"0"}
+					actionType={setNumber}
+					test="value-0"
+				>
 					0
 				</Button>
-				<Button dispatch={dispatch} payload={"."} actionType={setNumber}>
+				<Button
+					dispatch={dispatch}
+					payload={"."}
+					actionType={setNumber}
+					test="value-."
+				>
 					.
 				</Button>
-				<Button dispatch={dispatch} actionType={calculate}>
+				<Button dispatch={dispatch} actionType={calculate} test="value-=">
 					=
 				</Button>
-				<Button dispatch={dispatch} payload={"-"} actionType={setOperation}>
+				<Button
+					dispatch={dispatch}
+					payload={"-"}
+					actionType={setOperation}
+					test="value--"
+				>
 					-
 				</Button>
 			</div>
