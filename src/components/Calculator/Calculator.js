@@ -22,7 +22,7 @@ const Calculator = () => {
 			<div className={styles.enteredText} data-test="prev-value">
 				{prevNumber}
 			</div>
-			<div className={styles.enteredText} data-test="current-value">
+			<div className={`${styles.enteredText} ${styles.current}`} data-test="current-value">
 				{currentNumber || 0}
 			</div>
 			<div className={styles.buttonContainer}>

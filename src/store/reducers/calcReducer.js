@@ -66,7 +66,7 @@ export const calcReducer = (state = initialState, action) => {
 				if (state.currentNumber === '') return state;
 				return {
 					...state,
-					currentNumber: Math.sqrt(state.currentNumber),
+					currentNumber: Math.sqrt(state.currentNumber).toString(),
 				};
       }
       
@@ -75,7 +75,7 @@ export const calcReducer = (state = initialState, action) => {
 				if (state.currentNumber === "") return state;
 				return {
 					...state,
-					currentNumber: state.currentNumber * state.currentNumber,
+					currentNumber: (state.currentNumber * state.currentNumber).toString(),
 				};
 			}
 

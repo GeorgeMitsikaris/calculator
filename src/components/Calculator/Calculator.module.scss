@@ -1,44 +1,67 @@
-@use '../../Styles/typography.scss';
-@use '../../Styles/variables.scss';
+@use "../../Styles/typography.scss";
+@use "../../Styles/variables.scss";
 
 .container {
-  margin: 3rem auto;
-  width: 100%;
-  max-width: 80rem;
-  display: grid;
-  border: 1px solid variables.$black;
-  border-radius: .5rem;
-  padding: 2rem;
-  background-color: variables.$secondary-color
+	margin: 4rem auto;
+	width: 95%;
+	max-width: 80rem;
+	display: grid;
+	border: 1px solid variables.$black;
+	border-radius: 0.5rem;
+	padding: 5rem;
+	background-color: variables.$primary-color;
 }
 
 .header {
-  text-align: right;
+	text-align: right;
+	color: variables.$white;
+	margin-bottom: 2rem;
 }
 
 .enteredText {
-  width: 100%;
-  background-color: variables.$grey;
-  height: 3rem;
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  text-align: right;
+	width: 100%;
+	background-color: variables.$white;
+	height: 3rem;
+	margin-bottom: 1rem;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding: 1rem;
+  border-radius: .6rem;
+  margin-bottom: 2rem;
+}
+
+.current {
+	height: 4rem;
+	font-weight: bold;
+	font-size: 3rem;
+  margin-bottom: 4rem;
 }
 
 .result {
-  width: 100%;
-  background-color: variables.$grey;
-  height: 3rem;
+	width: 100%;
+	background-color: variables.$grey;
+	height: 3rem;
 }
 
 .buttonContainer {
-  display: flex;
-  gap: 1.25%;
-  margin-bottom: .5rem;
+	display: flex;
+	gap: 3%;
+	margin-bottom: 3rem;
 }
 
 .overline {
-  border-top: 1px solid black;
-  font-size: 2.5rem;
+	border-top: 1px solid variables.$black;
+	font-size: 4.5rem;
 }
 
+@media (max-width: 500px) {
+  .container {
+    padding: 1rem;
+  }
+
+	.overline {
+		font-size: 3rem;
+	}
+}
