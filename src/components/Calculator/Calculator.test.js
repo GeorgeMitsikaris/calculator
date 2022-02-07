@@ -296,4 +296,18 @@ describe("User interactions", () => {
 		expect(currentNumberDiv.text()).toBe("0");
 		expect(prevNumberDiv.text()).toBe("");
 	});
+
+	it("user can change operation (from * to +)", () => {
+		wrapper = setup();
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonPlus = wrapper.find("[data-test='value-+']");
+		const buttonMultiply = wrapper.find("[data-test='value-*']");
+		buttonEight.simulate("click");
+		buttonMultiply.simulate("click");
+		buttonPlus.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("0");
+		expect(prevNumberDiv.text()).toBe("8+");
+	});
 });
