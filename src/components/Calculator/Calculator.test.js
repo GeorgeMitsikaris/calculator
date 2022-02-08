@@ -310,4 +310,48 @@ describe("User interactions", () => {
 		expect(currentNumberDiv.text()).toBe("0");
 		expect(prevNumberDiv.text()).toBe("8+");
 	});
+
+	it("when using square root and after hit a number the currnent number is replaced with the new number and the result is correct", () => {
+		wrapper = setup();
+		const buttonTwo = wrapper.find("[data-test='value-2']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonRoot = wrapper.find("[data-test='value-r']");
+		const buttonPlus = wrapper.find("[data-test='value-+']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonTwo.simulate("click");
+		buttonPlus.simulate("click");
+		buttonFour.simulate("click");
+		buttonRoot.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("2");
+		expect(prevNumberDiv.text()).toBe("2+"); 
+		buttonEight.simulate("click");
+		buttonEquals.simulate("click");
+		expect(currentNumberDiv.text()).toBe("10");
+		expect(prevNumberDiv.text()).toBe(""); 
+	});
+
+	it("when using squared and after hit a number the currnent number is replaced with the new number and the result is correct", () => {
+		wrapper = setup();
+		const buttonTwo = wrapper.find("[data-test='value-2']");
+		const buttonFour = wrapper.find("[data-test='value-4']");
+		const buttonEight = wrapper.find("[data-test='value-8']");
+		const buttonSquared = wrapper.find("[data-test='value-e']");
+		const buttonPlus = wrapper.find("[data-test='value-+']");
+		const buttonEquals = wrapper.find("[data-test='value-=']");
+		buttonTwo.simulate("click");
+		buttonPlus.simulate("click");
+		buttonFour.simulate("click");
+		buttonSquared.simulate("click");
+		const currentNumberDiv = wrapper.find("[data-test='current-value']");
+		const prevNumberDiv = wrapper.find("[data-test='prev-value']");
+		expect(currentNumberDiv.text()).toBe("16");
+		expect(prevNumberDiv.text()).toBe("2+");
+		buttonEight.simulate("click");
+		buttonEquals.simulate("click");
+		expect(currentNumberDiv.text()).toBe("10");
+		expect(prevNumberDiv.text()).toBe(""); 
+	});
 });

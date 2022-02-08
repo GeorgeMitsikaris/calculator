@@ -9,8 +9,9 @@ import {
 const initialState = {
 	prevNumber: "",
 	currentNumber: "",
-  operation: "",
-  isFinal: false
+	operation: "",
+	isFinal: false,
+	isSquare: false,
 };
 
 const calculate = (state) => {
@@ -39,6 +40,14 @@ const calculate = (state) => {
 export const calcReducer = (state = initialState, action) => {  
 	switch (action.type) {
 		case SET_NUMBER:
+			// If the user press a number after has used square root or squared replaces the number with the new one just like windows calculator
+			if (state.isSquare) {
+				return {
+					...state,
+					currentNumber: action.payload,
+					isSquare: false
+				}
+			}
 			// isFinal flag is set to true only when the user hits the equal button and we make sure that we override the result from the previous calculation
 			if (state.isFinal) {
 				return {
@@ -67,6 +76,7 @@ export const calcReducer = (state = initialState, action) => {
 				return {
 					...state,
 					currentNumber: Math.sqrt(state.currentNumber).toString(),
+					isSquare: true
 				};
       }
       
@@ -76,6 +86,7 @@ export const calcReducer = (state = initialState, action) => {
 				return {
 					...state,
 					currentNumber: (state.currentNumber * state.currentNumber).toString(),
+					isSquare: true
 				};
 			}
 
