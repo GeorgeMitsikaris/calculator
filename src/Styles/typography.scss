@@ -3,12 +3,16 @@ h1 {
 	font-weight: 700;
 }
 
+span {
+	font-size: 4.5rem;
+}
+
 button {
 	font-size: 4.5rem;
 }
 
 @media (max-width: 500px) {
-	button {
+	button, span {
 		font-size: 3rem;
 	}
 }
