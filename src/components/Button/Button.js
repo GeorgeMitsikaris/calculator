@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styles from "./Button.module.scss";
 
-const Button = ({ children, dispatch, actionType, payload, test }) => {
+const Button = ({ children, actionType, payload, test }) => {
+	const dispatch = useDispatch();
 	const clickHandler = () => {
 		dispatch(actionType(payload));
 	};

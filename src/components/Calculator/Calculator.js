@@ -35,18 +35,16 @@ const Calculator = () => {
 					&radic;<span className={styles.overline}>x</span>
 				</Button>
 				<Button
-					dispatch={dispatch}
 					payload={"e"}
 					actionType={setOperation}
 					test="value-e"
 				>
 					x<sup>2</sup>
 				</Button>
-				<Button dispatch={dispatch} actionType={clearNumber} test="value-clear">
+				<Button actionType={clearNumber} test="value-clear">
 					CE
 				</Button>
 				<Button
-					dispatch={dispatch}
 					actionType={deleteLastDigit}
 					test="value-del"
 				>
@@ -55,7 +53,6 @@ const Calculator = () => {
 			</div>
 			<div className={styles.buttonContainer}>
 				<Button
-					dispatch={dispatch}
 					payload={"1"}
 					actionType={setNumber}
 					test="value-1"
@@ -63,18 +60,16 @@ const Calculator = () => {
 					1
 				</Button>
 				<Button
-					dispatch={dispatch}
 					payload={"2"}
 					actionType={setNumber}
 					test="value-2"
 				>
 					2
 				</Button>
-				<Button dispatch={dispatch} payload={"3"} actionType={setNumber}>
+				<Button payload={"3"} actionType={setNumber}>
 					3
 				</Button>
 				<Button
-					dispatch={dispatch}
 					payload={"÷"}
 					actionType={setOperation}
 					test="value-/"
@@ -84,21 +79,19 @@ const Calculator = () => {
 			</div>
 			<div className={styles.buttonContainer}>
 				<Button
-					dispatch={dispatch}
 					payload={"4"}
 					actionType={setNumber}
 					test="value-4"
 				>
 					4
 				</Button>
-				<Button dispatch={dispatch} payload={"5"} actionType={setNumber}>
+				<Button payload={"5"} actionType={setNumber}>
 					5
 				</Button>
-				<Button dispatch={dispatch} payload={"6"} actionType={setNumber}>
+				<Button payload={"6"} actionType={setNumber}>
 					6
 				</Button>
 				<Button
-					dispatch={dispatch}
 					payload={"*"}
 					actionType={setOperation}
 					test="value-*"
@@ -107,7 +100,7 @@ const Calculator = () => {
 				</Button>
 			</div>
 			<div className={styles.buttonContainer}>
-				<Button dispatch={dispatch} payload={"7"} actionType={setNumber}>
+				<Button payload={"7"} actionType={setNumber}>
 					7
 				</Button>
 				<Button
@@ -118,7 +111,7 @@ const Calculator = () => {
 				>
 					8
 				</Button>
-				<Button dispatch={dispatch} payload={"9"} actionType={setNumber}>
+				<Button payload={"9"} actionType={setNumber}>
 					9
 				</Button>
 				<Button
@@ -147,7 +140,7 @@ const Calculator = () => {
 				>
 					.
 				</Button>
-				<Button dispatch={dispatch} actionType={calculate} test="value-=">
+				<Button actionType={calculate} test="value-=">
 					=
 				</Button>
 				<Button
